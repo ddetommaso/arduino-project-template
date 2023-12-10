@@ -13,7 +13,7 @@ This repository provides a Dockerized template for develop your projects using A
 
 1. Create your repository from this template
 
-- [Creating a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)
+    [Creating a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)
 
 2. Start the Arduino IDE:
 
