@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+
+  arduino-ide:
+    image: arduino-ide.local
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        DOCKER_SRC: dockyland/arduino-ide:2.2.1
+        USER_UID: ${USER_UID}
+        USER_GID: ${USER_GID}
+        PLUGDEV_GROUP_ID: ${PLUGDEV_GROUP_ID}
+        DIALOUT_GROUP_ID: ${DIALOUT_GROUP_ID}
+
+    container_name: arduino-ide-container
+
+    network_mode: host
+
+    privileged: true
+
+    environment:
+      - DISPLAY=${DISPLAY}
+      - XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR}
+
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /dev:/dev
+      - ${PWD}/arduino-cli.yaml:/home/docky/.arduinoIDE/arduino-cli.yaml
+      - ${PWD}/CLI-init.sh:/workspace/CLI-init.sh
+      - ${PWD}/project:/workspace/project
+      - arduino15:/home/docky/.arduino15
+      - arduinoIDE:/home/docky/.arduinoIDE
+      - workspace:/workspace
+    
+    command: sh -c "bash /workspace/CLI-init.sh && arduino-ide /workspace/project"
+
+volumes:
+  arduino15:
+  arduinoIDE:
+  workspace:
